@@ -4,32 +4,14 @@ import os
 
 version = '0.2dev'
 
-script_functions = [getattr(console, f) for f in dir(console)]
-script_functions = [
-    f for f in script_functions 
-    if getattr(f, '__doc__', None) and ('Usage: ' in 'Usage: ' in f.__doc__)
-]
-console_scripts = [
-    '%(func)s = rbco.rename.console:%(func)s' % {'func': f.__name__}
-    for f in script_functions
-]
 
-usage_doc = \
-"""
-Usage
-=====
-
-"""
-
-for f in script_functions:
-    usage_doc += '- %s\n' % f.__doc__.replace('Usage: ', '')
 
 
 
 setup(name='rbco.rename',
       version=version,
       description="A set of Python scripts to rename files in batch.",
-      long_description=open("README.txt").read() + "\n" + usage_doc + "\n" +
+      long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
@@ -49,5 +31,16 @@ setup(name='rbco.rename',
           'setuptools',
           # -*- Extra requirements: -*-
       ],
-      entry_points={'console_scripts': console_scripts},
+      entry_points={
+          'console_scripts': [
+              'renpre = rbco.rename.console:renpre',
+              'rensuf = rbco.rename.console:rensuf',
+              'unhide = rbco.rename.console:unhide',
+              'renlu = rbco.rename.console:renlu',
+              'renmp3 = rbco.rename.console:renmp3',
+              'renrep = rbco.rename.console:renrep',                    
+              'rendeln = rbco.rename.console:rendeln',                    
+              'rendel = rbco.rename.console:rendel',      
+          ]
+      },
 )
