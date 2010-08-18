@@ -1,4 +1,3 @@
-from rbco.rename import console
 from setuptools import setup, find_packages
 import os
 
