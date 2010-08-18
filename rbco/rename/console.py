@@ -13,8 +13,7 @@ def unhide():
     files = sys.argv
 
     for f in files:
-        if f[0] == ".":
-            os.rename(f, f[1:])
+        renaming.unhide(f)
 
 def rensuf():
     """

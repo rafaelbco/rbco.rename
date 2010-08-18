@@ -17,17 +17,7 @@ def removeExtension(filename):
     if len(parts) > 1:
         return ".".join(parts[:-1])
     else:
-        return filename
-        
-def fileUriToPath(uri):
-    """Converts a file uri to a path.
-    
-    Eg.: if uri is "file:///home/rafaelb" then "/home/rafaelb" is returned.
-    """
-    if not uri.startswith("file://"):
-        return None
-    
-    return urllib.unquote(uri.replace("file://", "", 1))
+        return filename       
         
 def rename_prefix(files, s):
     """Renames all files in files prefixing then with the string s.
@@ -123,8 +113,9 @@ def fixTrackNumber(fname):
     if len(track_number) == 1:
         track_number = '0' + track_number
         
-    return fname.replace(matched, track_number + separator)     
-    
-def escape_space(filename):
-    return filename.replace(' ', '\ ')
+    return fname.replace(matched, track_number + separator)      
+               
+def unhide(filename):
+    if filename[0].startswith('.'):
+        os.rename(filename, filename[1:])
     
