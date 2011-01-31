@@ -2,6 +2,8 @@
 import os
 import urllib
 import re
+from unidecode import unidecode
+
     
 def getExtension(filename):
     """Returns the file extension."""
@@ -79,6 +81,20 @@ def rename_delete_first_chars(files, n):
         newName = filename[n:]
         os.rename(f, os.path.join(filedir, newName))  
 
+def rename_remove_accentuation(files):
+    """
+    Renames all files `files` replacing all accentuated characters by their ASCII counterparts.
+    Eg.: "É Fácil.mp3" -> "E Facil.mp3"
+    
+    Arguments:
+    files -- a sequence of path strings.
+    """
+    for f in files:
+        (filedir, filename) = os.path.split(f)
+        u_filename = unicode(filename, 'utf8')
+        new_name = unidecode(u_filename)
+        os.rename(f, os.path.join(filedir, new_name))
+
 def fixTitleCase(fileName):
     """Fix the string.title() issue with '. E.g.: takes "You Don'T Know" and 
     returns "You Don't Know".
@@ -118,4 +134,6 @@ def fixTrackNumber(fname):
 def unhide(filename):
     if filename[0].startswith('.'):
         os.rename(filename, filename[1:])
-    
+        
+        
+

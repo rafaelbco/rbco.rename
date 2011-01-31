@@ -1,11 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.2'
-
-
-
-
+version = '0.3dev'
 
 setup(name='rbco.rename',
       version=version,
@@ -28,7 +24,7 @@ setup(name='rbco.rename',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'Unidecode',
       ],
       entry_points={
           'console_scripts': [
@@ -40,6 +36,7 @@ setup(name='rbco.rename',
               'renrep = rbco.rename.console:renrep',                    
               'rendeln = rbco.rename.console:rendeln',                    
               'rendel = rbco.rename.console:rendel',      
+              'renremoveacc = rbco.rename.console:renremoveacc',
           ]
       },
 )

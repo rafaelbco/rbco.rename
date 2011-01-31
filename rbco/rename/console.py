@@ -152,4 +152,14 @@ def rendeln():
     files = sys.argv[2:]
     
     renaming.rename_delete_first_chars(files, n)
+    
+def renremoveacc():
+    """
+    Usage: renremoveacc FILES
+    
+    Rename the FILES by replacing all accentuated characters by their ASCII counterparts.
+    Eg.: "É Fácil.mp3" -> "E Facil.mp3"
+    """    
+    files = sys.argv[1:]
+    renaming.rename_remove_accentuation(files)
                  

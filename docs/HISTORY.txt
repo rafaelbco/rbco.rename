@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.3dev
+------
+
+- Added ``renaming.rename_remove_accentuation`` and ``console.renremoveacc`` -- and its 
+  corresponding console script entry-point.
+
 0.2 (2010-08-18)
 ----------------
 
