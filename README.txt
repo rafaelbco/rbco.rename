@@ -36,6 +36,8 @@ Usage
 - renmp3 FILES
     
   Renames all files in FILES performing the following operations:
+    - replaces all accentuated characters by their ASCII counterparts (Eg.: 
+      "É Fácil.mp3" -> "E Facil.mp3").  
     - replaces '_' by ' ';
     - replaces ' - ' and '- ' by '-';
     - titlecase the names;

@@ -4,7 +4,8 @@ Changelog
 0.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Refactoring: moved funcionality out of ``console.renmp3`` to ``renaming.rename_mp3``.
+- Now "mp3" renaming -- provided by the ``renmp3`` script -- also removes accentuation.
 
 
 0.3 (2011-01-31)

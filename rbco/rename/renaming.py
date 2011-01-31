@@ -83,20 +83,70 @@ def rename_delete_first_chars(files, n):
 
 def rename_remove_accentuation(files):
     """
-    Renames all files `files` replacing all accentuated characters by their ASCII counterparts.
+    Renames all `files` replacing all accentuated characters by their ASCII counterparts.
     Eg.: "É Fácil.mp3" -> "E Facil.mp3"
     
     Arguments:
     files -- a sequence of path strings.
     """
     for f in files:
-        (filedir, filename) = os.path.split(f)
-        u_filename = unicode(filename, 'utf8')
-        new_name = unidecode(u_filename)
+        (filedir, filename) = os.path.split(f)        
+        new_name = remove_accentuation(filename)
         os.rename(f, os.path.join(filedir, new_name))
 
+def rename_mp3(files):
+    """    
+    Renames all `files` in performing the following operations:
+    - replaces all accentuated characters by their ASCII counterparts (Eg.: 
+      "É Fácil.mp3" -> "E Facil.mp3").
+    - replaces '_' by ' ';
+    - replaces ' - ' and '- ' by '-';
+    - titlecase the names;
+    - lowcase file extension;
+    - remove leading and trailing spaces;
+    - replace ' ' by '-' after the track number, if needed;
+    - makes track numbers have always 2 digits.
+    
+    
+    Arguments:
+    files -- a sequence of path strings.    
+    """        
+    for path in files:
+        if not path:
+            continue
+        
+        if path[-1] == os.sep:
+            path = path[:-1]
+        
+        (filedir, filename) = os.path.split(path)
+        
+        if not filename:
+            continue
+        
+        extension = getExtension(filename)
+        newName = removeExtension(filename)        
+        
+        newName = remove_accentuation(newName) \
+            .replace("_", " ") \
+            .replace(" - ", "-") \
+            .replace("- ", "-") \
+            .title() \
+            .strip()
+        newName = fixTrackNumber(newName)
+        newName = fixTitleCase(newName)
+        
+        if extension:
+            newName += "." + extension.lower()        
+        
+        newPath = os.path.join(filedir, newName)
+                           
+        os.rename(path, newPath)    
+
+def remove_accentuation(s):
+    return unidecode(unicode(s, 'utf8'))
+
 def fixTitleCase(fileName):
-    """Fix the string.title() issue with '. E.g.: takes "You Don'T Know" and 
+    """Fix the string.title() issue with the (') character. E.g.: takes "You Don'T Know" and 
     returns "You Don't Know".
     """
     

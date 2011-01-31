@@ -51,15 +51,14 @@ def renpre():
     files = sys.argv[2:]
     
     renaming.rename_prefix(files, s)        
-    
-
-    
 
 def renmp3():
     """
     Usage: renmp3 FILES
     
     Renames all files in FILES performing the following operations:
+    - replaces all accentuated characters by their ASCII counterparts (Eg.: 
+      "É Fácil.mp3" -> "E Facil.mp3").    
     - replaces '_' by ' ';
     - replaces ' - ' and '- ' by '-';
     - titlecase the names;
@@ -68,39 +67,8 @@ def renmp3():
     - replace ' ' by '-' after the track number, if needed;
     - makes track numbers have always 2 digits.
     """
-    paths = sys.argv[1:]
-        
-    for path in paths:
-        if not path:
-            continue
-        
-        if path[-1] == os.sep:
-            path = path[:-1]
-        
-        (filedir, filename) = os.path.split(path)
-        
-        if not filename:
-            continue
-        
-        extension = renaming.getExtension(filename)
-        newName = renaming.removeExtension(filename)
-            
-        newName = newName \
-            .replace("_", " ") \
-            .replace(" - ", "-") \
-            .replace("- ", "-") \
-            .title() \
-            .strip()
-        newName = renaming.fixTrackNumber(newName)
-        newName = renaming.fixTitleCase(newName)
-        
-        if extension:
-            newName += "." + extension.lower()        
-        
-        newPath = os.path.join(filedir, newName)
-                           
-        os.rename(path, newPath)
-        
+    files = sys.argv[1:]
+    renaming.rename_mp3(files)
                 
 def renlu():
     """
