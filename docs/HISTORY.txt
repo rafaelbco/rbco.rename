@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.4 (unreleased)
+0.4 (2011-01-31)
 ----------------
 
 - Refactoring: moved funcionality out of ``console.renmp3`` to ``renaming.rename_mp3``.
