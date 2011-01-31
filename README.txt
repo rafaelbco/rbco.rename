@@ -66,7 +66,6 @@ Usage
 - renremoveacc FILES
     
   Rename the FILES by replacing all accentuated characters by their ASCII counterparts.
-  Eg.: "É Fácil.mp3" -> "E Facil.mp3"  
 
 
 .. References
