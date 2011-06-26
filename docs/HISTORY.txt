@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.5 (unreleased)
+0.5 (2011-06-26)
 ----------------
 
 - Added ``renid3`` script.
