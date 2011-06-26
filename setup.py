@@ -25,6 +25,7 @@ setup(name='rbco.rename',
       install_requires=[
           'setuptools',
           'Unidecode',
+          'mutagen>=1.20'
       ],
       entry_points={
           'console_scripts': [
