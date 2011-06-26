@@ -1,3 +1,4 @@
+#coding=utf8
 import os
 import sys
 import renaming
@@ -69,6 +70,20 @@ def renmp3():
     """
     files = sys.argv[1:]
     renaming.rename_mp3(files)
+    
+def renid3():
+    """    
+    USAGE: renid3 FILES
+    
+    Rename all FILES based on the ID3 tags and the FORMAT. Example of FORMAT:
+    '%(tracknumber)s-%(artist)s-%(title)s.mp3'. Other tags can be specified: date, author,
+    composer, performer, discnumber, album, etc.
+    
+    FORMAT is retrieved from the RBCO_RENAME_ID3_FORMAT environment 
+    variable. If there's no such variable then a default format is used.        
+    """
+    files = sys.argv[1:]
+    renaming.rename_id3(files)    
                 
 def renlu():
     """

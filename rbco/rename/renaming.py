@@ -4,8 +4,21 @@ import os
 import urllib
 import re
 from unidecode import unidecode
+from mutagen.easyid3 import EasyID3
 
 DEFAULT_ID3_FORMAT = '%(tracknumber)s-%(title)s.mp3'
+
+def convert_mutagen_dict(d):
+    new_d = dict(
+        (k, (isinstance(v, list) and v[0]) or v)
+        for (k, v) in d.iteritems()
+    )
+    if 'tracknumber' in new_d:
+        new_d['tracknumber'] = '%02d' % int(new_d['tracknumber'])
+    
+    return new_d
+    
+    
 
 def rename_files(paths, new_name_func):
     """
@@ -14,7 +27,9 @@ def rename_files(paths, new_name_func):
     """
     for f in paths:      
         (filedir, filename) = os.path.split(f)        
-        os.chdir(filedir)
+        if filedir:
+            os.chdir(filedir)
+        
         os.rename(
             f, 
             os.path.join(filedir, new_name_func(filename))
@@ -129,7 +144,7 @@ def rename_id3(files, format=None):
     variable. If there's no such variable then a default format is used.    
     """
     format = format or os.environ.get('RBCO_RENAME_ID3_FORMAT', DEFAULT_ID3_FORMAT)
-    return rename_files(files, lambda f: format % EasyID3(f))
+    return rename_files(files, lambda f: format % convert_mutagen_dict(EasyID3(f)))
 
 
 def getExtension(filename):
@@ -167,7 +182,7 @@ def fixTitleCase(fileName):
     return "'".join(fixedParts)       
     
 def fixTrackNumber(fname):
-    """Replace ' ' by '-' after the track number, if needed."""
+    """Replace ' ' by '-' after the track number, if neededed."""
     TRACK_NUMBER_PATTERN = r'(\d\d?)( |-)'
     
     match = re.match(TRACK_NUMBER_PATTERN, fname)

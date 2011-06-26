@@ -44,6 +44,18 @@ Usage
     - remove leading and trailing spaces;
     - replace ' ' by '-' after the track number, if needed;
     - makes track numbers have always 2 digits.
+
+- renid3 FILES
+
+  USAGE: renid3 FILES
+
+  Rename all FILES based on the ID3 tags and the FORMAT. Example of FORMAT:
+  '%(tracknumber)s-%(artist)s-%(title)s.mp3'. Other tags can be specified: date, author,
+  composer, performer, discnumber, album, etc.
+
+  FORMAT is retrieved from the RBCO_RENAME_ID3_FORMAT environment 
+  variable. If there's no such variable then a default format is used.        
+    
     
 - renpre PREFFIX FILES
     

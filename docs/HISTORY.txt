@@ -4,7 +4,7 @@ Changelog
 0.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Added ``renid3`` script.
 
 
 0.4 (2011-01-31)
